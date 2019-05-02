@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Crescat</title>
+  <link href="https://fonts.googleapis.com/css?family=UnifrakturCook:700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:300" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="crescat.css">
+<body>
+
+<div id="crescat_val" style="visibility: hidden">$1,000</div>
+<!-- <h1 id="title"class="fraktur">Crescat</h1> -->
+
+<p class="largertext">Let <strike>knowledge</strike> the endowment grow from more to more; and so be <strike>human life</strike> Robert Zimmer enriched.</p>
+
+<div id="endowment">
+  <button id="mainbutton" class="fraktur"onclick="crescat_endowment()">Crescat</button>
+  <h2><span class="fraktur">Endowment: </span><div id="endowment_val">$0</div></h2>
+<div>
+
+
+<div id="firstcol">
+<h2 class="fraktur">Students and Facilities</h2>
+<table>
+  <tr>
+    <th class="totals">Undergrads: <div id="undergrad_count">0</div></th>
+    <th class="totals">Grad Students: <div id="grad_count">0</div></th>
+    <th class="totals">Fancy Buildings: <div id="building_count">0</div></th>
+  </tr>
+
+  <tr>
+    <td>
+      <button onclick="buy_thing('undergrad')">
+      Enroll for <div id="undergrad_cost">$10,000</div></button>
+    </td>
+    <td>
+      <button onclick="buy_thing('grad')">
+      Enroll for <div id="grad_cost">$100,000</div></button>
+    </td>
+    <td>
+      <button onclick="buy_thing('building')">
+      Build for <div id="building_cost">$100,000,000</div></button>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Tuition: <div id="undergrad_val">$50,000</div></td>
+    <td>Research Value: <div id="grad_val">$250,000</div></td>
+    <td>Renaming Donation: <div id="building_val">$15,000,000</div></td>
+  </tr>
+
+</table>
+</div>
+
+<div id="secondcol">
+<h2 class="fraktur">Upgrades</h2>
+<table>
+  <tr>
+    <th>Scientia</th>
+    <th>Price of the Mind</th>
+    <th>Deunionization</th>
+    <th>Eccentric Architecture</th>
+  </tr>
+
+  <tr>
+    <td>
+      <button onclick="upgrade_thing('crescat')">
+      Research for <div id="crescat_upgrade_cost">$50,000</div></button>
+    </td>
+    <td>
+      <button onclick="upgrade_thing('undergrad')">
+      Research for <div id="undergrad_upgrade_cost">$100,000</div></button>
+    </td>
+    <td>
+      <button onclick="upgrade_thing('grad')">
+      Research for <div id="grad_upgrade_cost">$20,000,000</div></button>
+    </td>
+    <td>
+      <button onclick="upgrade_thing('building')">
+      Research for <div id="building_upgrade_cost">$7,000,000,000</div></button>
+    </td>
+  </tr>
+
+</table>
+</div>
+
+<script>
+
+function get_money_val(element_id) {
+  str_val = document.getElementById(element_id).innerHTML;
+  deformated = str_val.replace(/\$/g, "").replace(/,/g, "");
+  return parseInt(deformated);
+}
+
+function put_money_val(element_id, int_val) {
+  rounded = Math.round(int_val);
+  str_val = '$' + rounded.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  document.getElementById(element_id).innerHTML = str_val;
+}
+
+function inc_endowment(inc) {
+  val = get_money_val("endowment_val");
+  put_money_val("endowment_val", val + inc);
+}
+
+function crescat_endowment(inc) {
+  cresc_val = get_money_val("crescat_val");
+  inc_endowment(cresc_val);
+}
+
+function buy_thing(thing_name) {
+  end_val = get_money_val("endowment_val");
+  cost = get_money_val(thing_name + "_cost");
+  count = parseInt(document.getElementById(thing_name + "_count").innerHTML)
+
+  if (end_val >= cost) {
+    put_money_val(thing_name + "_cost", cost * 1.1);
+    document.getElementById(thing_name + "_count").innerHTML = count + 1;
+    inc_endowment(-cost);
+  }
+  // else some kind of failure message?
+}
+
+function upgrade_thing(thing_name) {
+  end_val = get_money_val("endowment_val");
+  cost = get_money_val(thing_name + "_upgrade_cost");
+  val = get_money_val(thing_name + "_val");
+  growth_rates = {
+      "crescat": 0.5,
+      "undergrad": 0.01,
+      "grad": 0.05,
+      "building": 0.1
+    };
+
+  if (end_val >= cost){
+    new_val = val * (1 + growth_rates[thing_name])
+    put_money_val(thing_name + "_val", new_val);
+    put_money_val(thing_name + "_upgrade_cost", cost * 2);
+    inc_endowment(-cost);
+  }
+  // else some kind of failure message?
+}
+
+function extract_undergrad_value() {
+  count = parseInt(document.getElementById("undergrad_count").innerHTML);
+  val = get_money_val("undergrad_val");
+  inc_endowment(count * val);
+}
+setInterval(extract_undergrad_value, 1000)
+
+function extract_grad_value() {
+  count = parseInt(document.getElementById("grad_count").innerHTML);
+  val = val = get_money_val("grad_val");
+  inc_endowment(count * val);
+}
+setInterval(extract_grad_value, 4000)
+
+function extract_building_value() {
+  count = parseInt(document.getElementById("building_count").innerHTML);
+  val = val = get_money_val("building_val");
+  inc_endowment(count * val);
+}
+setInterval(extract_building_value, 20000)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,75 @@
+body {
+    height: 100%;
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#910010+0,56011f+100 */
+    background: #910010; /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #910010 0%, #56011f 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg, #910010 0%,#56011f 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg, #910010 0%,#56011f 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#910010', endColorstr='#56011f',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+    font-size: 45px;
+}
+h2 {
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+table {
+    margin: auto;
+}
+th {
+    margin: auto;
+    text-align: center;
+}
+td {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100px;
+}
+/*#firstcol {
+    float: left;
+}
+#secondcol {
+    float: right;
+}*/
+button {
+    color: #56011f;
+    font-size: 16px;
+    background-color: white;
+    border: 3px solid white;
+    border-radius: 15px;
+    padding: 5px;
+    width: 150px;
+}
+button:hover {
+    color: white;
+    background-color: #56011f;
+    border-color: white;
+
+}
+#title {
+    font-size: 75px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+#mainbutton {
+    font-size: 45px;
+    padding: 10px;
+    border-radius: 25px;
+}
+.largertext {
+    font-size: 25px;
+}
+.totals {
+    padding: 10px;
+}
+.fraktur {
+    font-family: 'UnifrakturCook', cursive;
+    font-size: 40px;
+    text-align: center;
+}
